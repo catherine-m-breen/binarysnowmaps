@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 2: Data Preparation &#8212; Custom binary snow maps with camera traps</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Conclusion" href="Chp4_conclusion.html" />
+    <link rel="prev" title="Custom binary snow maps with camera traps" href="Chp1_motivation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Custom binary snow maps with camera traps</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://geo-smart.github.io/index.html">
+   Geosmart Website
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://foundations.projectpythia.org/landing-page.html">
+   Project Pythia Foundations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   About Use Case Library
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter One
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chp1_motivation.html">
+   Custom binary snow maps with camera traps
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter Two
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Chapter 2: Data Preparation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter Four
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chp4_conclusion.html">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://catherine-m-breen.github.io/binarysnowmaps"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://catherine-m-breen.github.io/binarysnowmaps/issues/new?title=Issue%20on%20page%20%2Fchapters/Chp2_dataprep.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/catherine-m-breen.github.io/binarysnowmaps/edit/main/book/chapters/Chp2_dataprep.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapters/Chp2_dataprep.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#camera-trap-dataset">
+   Camera Trap Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#satellite-dataset">
+   Satellite Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-together">
+   Putting it together
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Chapter 2: Data Preparation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#camera-trap-dataset">
+   Camera Trap Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#satellite-dataset">
+   Satellite Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-together">
+   Putting it together
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-data-preparation">
+<h1>Chapter 2: Data Preparation<a class="headerlink" href="#chapter-2-data-preparation" title="Permalink to this headline">#</a></h1>
+<p>In this chapter, we will:</p>
+<ul class="simple">
+<li><p>map the camera locations used for this tutorial</p></li>
+<li><p>label camera trap images for “snow” or “no snow”</p></li>
+<li><p>extract satellite snow values at camera trap locations for all days of the study period</p></li>
+<li><p>“merge” two datasets together based on date and location</p></li>
+</ul>
+<section id="camera-trap-dataset">
+<h2>Camera Trap Dataset<a class="headerlink" href="#camera-trap-dataset" title="Permalink to this headline">#</a></h2>
+<p>Previous work to convert MODIS NDSI snow cover maps have used finer-scale resolution satellites, like Landsat, to identify at what threshold the NDSI value represents “snow” or “no snow.” Here we use a network of camera traps as the fine-scale ground data. While they are limited in spatial scale to their field of view (20-30m), they can be set up in networks of up to 100s of cameras, which, when done in large regions, approaches the coverage of satellite maps. Their ability to cover large regions makes them a perfect ground-based data source to compare to satellite information.</p>
+<p>The camera trap network that we will use is part of the Scandcam network (website: <a class="reference external" href="http://viltkamera.nina.no">viltkamera.nina.no</a>). Scandcam is a long-term, year-round study established in 2010 by the Norwegian Institute for Nature Research to monitor recovering Eurasian lynx (<em>Lynx lynx</em>). These cameras are optimized for lynx detection, but at 2km<sup>2</sup> area, the network can be used for ground data for the satellite.</p>
+<p>Below is a map of locations of Scandcam cameras (yellow points: n = 1181) in Norway and Sweden. Camera data for this tutorial is from three winters (January - March 2018, October 2018 - April 2019, October 2019 - April 2020). MODIS NDSI Snow Cover base map is from the same corresponding winters. It is a composite snow cover map created from mean MODIS NDSI snow cover values from the study period. The cameras spread a 10 degree latitudinal gradient (59 - 69 degrees North, and 8-16 degrees East), with no more than one camera per 2km<sup>2</sup> area across a 350,000 km<sup>2</sup> area. Seeing both the MODIS NDSI and camera trap locations together shows the large coverage of the cameras, and subsequently their ability to indicate snow presence versus absence in a variety of conditions.</p>
+<img alt="scandcam map" src="chapters/ntbk_data/scandcam_map.png" />
+<p><font size="1"><em>figure citation: Breen et al. 2023</em></font></p>
+<p>But, <b> How do we get the snow information from the cameras? <b></p>
+<p>When a camera trap takes a picture, it reports the time of day, the temperature, even the moon phase, but it does not automatically provide an indication of how much snow is in the image. It is up to the researcher to extract, or label, the image for the amount of snow.</p>
+<p>To extract the binary snow information from the camera images to make custom satellite-based snow maps, we must label images for <em>‘snow’</em> or <em>‘no snow’</em>. We will later compare these values to what the satellite reported, and determine what threshold the satellite agrees with the “snow” images for snow, and what values the satellite best agrees with the images for “no snow.” Below are two examples of images labeled for snow. The image on the left is labeled “no snow,” and the image on the right is labeled “snow.”</p>
+<img alt="snow/nosnow" src="chapters/ntbk_data/snow_noSnow.png" />
+<p>Of course, there are times when the snow is patchy, and it is hard to determine whether it is “snow” or “no snow.” Thus, there is some uncertainty when labelling images because labeling patchy snow is subjective. For our dataset, we labeled any image with approximately 25% snow or more as “snow.”</p>
+<p>We have already labeled the dataset for you. In total, we labeled <b>8,918 images across 665 cameras</b>. We labeled only 1 image per day, deferring to the “time-lapse” image, or the image that was taken at a set time every day. This way we ensured that there was consistency between when the satellite passed over the area and when the camera took the photo. Having one per day also allowed us to have a variety of snow conditions from different areas. Additionally, we only labelled daytime photos because snow is easier to see.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load in camera trap data</span>
+<span class="c1">#camData = pd.read_csv(&#39;##&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Below are some more examples of what *snow* and *no snow* images looked like. </span>
+<span class="c1">###&lt;img src=&quot;/Users/catherinebreen/code/Chapter2/ntbk_data/othersnow_values.png&quot; style=&quot;width: 400px;&quot; alt=&quot;snow_nosnow&quot; /&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="satellite-dataset">
+<h2>Satellite Dataset<a class="headerlink" href="#satellite-dataset" title="Permalink to this headline">#</a></h2>
+<p>Now that we have our camera images labeled for snow and no snow, we will now pull the satellite data. As a reminder, the satellite data reports snow on a scale of 0-100, and we are hoping to determine what NDSI value will best threshold the values for this region to snow or no snow.</p>
+<p>First, we must gather all MODIS maps for all days of interest. This can be done using Google Earth Engine. Google Earth Engine contains the MODIS NDSI dataset (<a class="reference external" href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD10A1">https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD10A1</a>). Google Earth Engine can be run in Python or in Java on the Google Earth Engine Code Editor. Running Google Earth Engine requires an account, so we will not show set-up here, but information on access to Google Earth Engine in Python or Java can be found here:</p>
+<p><a class="reference external" href="https://developers.google.com/earth-engine/guides/access">https://developers.google.com/earth-engine/guides/access</a></p>
+<p>For now, we will show a screenshot of an example raster of satellite information from MODIS. The colors range between black (no snow) and white (snow), with intermediate values of snow different shades of blue (color bar is below the map). The range of colors show the variety of snow cover values in southern Norway on one day. The code for visualizing and extracting MODIS snow information is here:</p>
+<img alt="oslo_modis_snow" src="chapters/ntbk_data/oslo_modis_ndsi.png" />
+<img alt="colorbar_modis_snow" src="chapters/ntbk_data/colorbar.png" />
+<p>Next we conduct a extraction of the MODIS NDSI value for every day of our time period of interest for every camera trap location. We conducted this in the Google Earth Code Editor and exported as a csv.</p>
+</section>
+<section id="putting-it-together">
+<h2>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this headline">#</a></h2>
+<p>After we have all the snow information at the camera data and the satellite information. We will conduct a “merge” in python to put the two datasets together. We will match based on day and location so that each observation is date, location, satellite value and camera value. We have already taken care of this step outside of the tutorial and code for the merge step can be found here: <a class="reference external" href="https://github.com/catherine-m-breen/MODIS-Snow-Cover-to-Binary-Snow-Covered-Area/blob/main/analysis">https://github.com/catherine-m-breen/MODIS-Snow-Cover-to-Binary-Snow-Covered-Area/blob/main/analysis</a></p>
+<p>A sample of the dataset is below. We have hid the locations for this tutorial in order to protect the privacy of the Scandcam network. We will use the <em>pandas</em> library in python to read in the csv.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load packages</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># pre-cleaned dataset for tutorial</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;ntbk_data/data.csv&quot;</span> 
+
+<span class="c1"># read in dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize dataset</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cameraID</th>
+      <th>Date</th>
+      <th>SnowCover</th>
+      <th>NDSImodis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>X</td>
+      <td>1/7/18</td>
+      <td>1</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>X</td>
+      <td>1/7/18</td>
+      <td>0</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>X</td>
+      <td>1/19/18</td>
+      <td>1</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>X</td>
+      <td>1/7/18</td>
+      <td>1</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>X</td>
+      <td>1/19/18</td>
+      <td>1</td>
+      <td>73</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As you can see for every location and date, there is a snow cover value of either 0 or 1 and a corresponding MODIS NDSI value that ranges from 0 to 100. In the next section, we will show how to conduct a threshold analysis to determine the best NDSI threshold to convert the NDSI modis values also to 0 (no snow) or 1 (snow).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Chp1_motivation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Custom binary snow maps with camera traps</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Chp4_conclusion.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Conclusion</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Catherine Breen, University of Washington<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
