@@ -14,57 +14,57 @@ parts:
 
 - caption: Chapter One
   chapters:
-    - file: chapters/motivation
+    - file: chapters/Chp1_motivation
 
 - caption: Chapter Two
   chapters:
-    - file: chapters/methods
+    - file: chapters/Chp2_dataprep
 
 - caption: Chapter Three
   chapters:
-    - file: chapters/data
+    - file: chapters/Chp3_findThreshold
 
 - caption: Chapter Four
   chapters:
-    - file: chapters/development
+    - file: chapters/Chp4_conclusion
 
-- caption: Chapter Five
-  chapters:
-    - file: chapters/training
+# - caption: Chapter Five
+#   chapters:
+#     - file: chapters/training
 
-- caption: Chapter Six
-  chapters:
-    - file: chapters/evaluation
+# - caption: Chapter Six
+#   chapters:
+#     - file: chapters/evaluation
 
-- caption: Chapter Seven
-  chapters:
-    - file: chapters/workflow
+# - caption: Chapter Seven
+#   chapters:
+#     - file: chapters/workflow
 
-- caption: Chapter Eight
-  chapters:
-    - file: chapters/reproducibility
+# - caption: Chapter Eight
+#   chapters:
+#     - file: chapters/reproducibility
 
-- caption: Chapter Nine
-  chapters:
-    - file: chapters/conclusion
+# - caption: Chapter Nine
+#   chapters:
+#     - file: chapters/conclusion
 
-- caption: Chapter Ten (optional)
-  chapters:
-    - file: chapters/todo
+# - caption: Chapter Ten (optional)
+#   chapters:
+#     - file: chapters/todo
 
-- caption: Chapter Eleven (optional)
-  chapters:
-    - file: chapters/questions
+# - caption: Chapter Eleven (optional)
+#   chapters:
+#     - file: chapters/questions
 
-- caption: Chapter Twelve (optional)
-  chapters:
-    - file: chapters/troubleshooting
+# - caption: Chapter Twelve (optional)
+#   chapters:
+#     - file: chapters/troubleshooting
 
-- caption: Chapter Thirteen
-  chapters:
-    - file: chapters/example
+# - caption: Chapter Thirteen
+#   chapters:
+#     - file: chapters/example
 
-- caption: Reference
-  chapters:
-    - file: reference/glossary
-    - file: reference/bibliography
+# - caption: Reference
+#   chapters:
+#     - file: reference/glossary
+#     - file: reference/bibliography
