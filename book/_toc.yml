@@ -22,7 +22,7 @@ parts:
 
 - caption: Chapter Three
   chapters:
-    - file: chapters/Chp3_findThreshold
+    - file: chapters/Chp3_findingThreshold
 
 - caption: Chapter Four
   chapters:
