@@ -422,33 +422,18 @@ title="Print to PDF"
 </ul>
 <section id="camera-trap-dataset">
 <h2>Camera trap dataset<a class="headerlink" href="#camera-trap-dataset" title="Permalink to this headline">#</a></h2>
-<p>Previous work to convert MODIS NDSI snow cover maps have used finer-scale resolution satellites, like Landsat, to identify at what threshold the NDSI value represents “snow” or “no snow.” Here we use a network of camera traps as the fine-scale ground data. While they are limited in spatial scale to their field of view (20-30m), they can be set up in networks of up to 1000s of cameras, which, when done in large regions, approaches the coverage of satellite maps. Their ability to cover large regions and observe environmental information makes them a perfect ground-based data source to compare to satellite information.</p>
-<p>The camera trap network that we will use is part of the Scandcam network (website: <a class="reference external" href="http://viltkamera.nina.no">viltkamera.nina.no</a>). Scandcam is a long-term, year-round study established in 2010 by the Norwegian Institute for Nature Research to monitor recovering Eurasian lynx (<em>Lynx lynx</em>). These cameras are optimized for lynx detection, but at 2km<sup>2</sup> area, the network can be used for ground data for the satellite.</p>
+<p>Previous work to convert MODIS NDSI snow cover maps have used finer-scale resolution satellites, like Landsat, to identify at what threshold the NDSI value represents “snow” or “no snow.” Here we use a network of camera traps as the fine-scale ground data. While they are limited in spatial scale to their field of view (20-30m), they can be set up in networks of up to 1000s of cameras, which, when done in large regions, approaches the coverage of satellite maps. Their ability to cover large regions and observe environmental information makes them a advantegous ground-based data source to compare to satellite information.</p>
+<p>The camera trap network that we will use is part of the Scandcam network (website: <a class="reference external" href="http://viltkamera.nina.no">viltkamera.nina.no</a>). Scandcam is a long-term, year-round study established in 2010 by the Norwegian Institute for Nature Research to monitor recovering Eurasian lynx (<em>Lynx lynx</em>). Optimized for lynx detection, the cameras are placed in mostly forested habitats and areas that lynx use (e.g., wildlife trails, forest roads, and along the base of cliffs/boulders) (Angoh et al. 2023).</p>
 <p>Below is a map of locations of Scandcam cameras (yellow points: n = 1181) in Norway and Sweden. Camera data for this tutorial is from three winters (January - March 2018, October 2018 - April 2019, October 2019 - April 2020). MODIS NDSI Snow Cover base map is from the same corresponding winters. It is a composite snow cover map created from mean MODIS NDSI snow cover values from the study period. The cameras spread a 10 degree latitudinal gradient (59 - 69 degrees North, and 8-16 degrees East), with no more than one camera per 2km<sup>2</sup> area across a 350,000 km<sup>2</sup> area. Seeing both the MODIS NDSI and camera trap locations together shows the large coverage of the cameras, and subsequently their ability to indicate snow presence versus absence in a variety of conditions.</p>
 <img alt="scandcam map" src="../_images/scandcam_map.png" />
 <p><font size="1"><em>figure citation: Breen et al. 2023</em></font></p>
 <p>But, <b> How do we get the snow information from the cameras? </b></p>
 <p>When a camera trap takes a picture, it reports the time of day, the temperature, even the moon phase, but it does not automatically provide an indication of how much snow is in the image. It is up to the researcher to extract, or label, the image for the amount of snow.</p>
 <p>To extract the binary snow information from the camera images to make custom satellite-based snow maps, we must label images for <em>‘snow’</em> or <em>‘no snow’</em>. We will later compare these values to what the satellite reported, and determine what threshold the satellite agrees with the “snow” images for snow, and what values the satellite best agrees with the images for “no snow.” Below are two examples of images labeled for snow. The image on the left is labeled “no snow,” and the image on the right is labeled “snow.”</p>
-<img alt="snow/nosnow" src="chapters/img/snow_noSnow.png" />
+<img alt="snow_nosnow" src="../_images/snow_noSnow.png" />
 <p>Of course, there are times when the snow is patchy, and it is hard to determine whether it is “snow” or “no snow.” Thus, there is some uncertainty when labelling images because labeling patchy snow is subjective. For our dataset, we labeled any image with approximately 25% snow or more as “snow.”</p>
-<p>We have already labeled the dataset for you. In total, we labeled <b>8,918 images across 665 cameras</b>. We labeled only 1 image per day, deferring to the “time-lapse” image, or the image that was taken at a set time every day. This way we ensured that there was consistency between when the satellite passed over the area and when the camera took the photo. Having one per day also allowed us to have a variety of snow conditions from different areas. Additionally, we only labelled daytime photos because snow is easier to see.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load in camera trap data</span>
-<span class="c1">#camData = pd.read_csv(&#39;##&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Below are some more examples of what *snow* and *no snow* images looked like. </span>
-<span class="c1">###&lt;img src=&quot;/Users/catherinebreen/code/Chapter2/ntbk_data/othersnow_values.png&quot; style=&quot;width: 400px;&quot; alt=&quot;snow_nosnow&quot; /&gt;</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>We have already labeled the dataset for you. In total, we labeled <b>8,918 images across 665 cameras</b>. We labeled only 1 image per day, deferring to the “time-lapse” image, or the image that was taken at a set time every day. In this case 8AM. This way we ensured that there was consistency between when the satellite passed over the area and when the camera took the photo. Having one per day also allowed us to have a variety of snow conditions from different areas. Additionally, we only labelled daytime photos because snow is easier to see.</p>
+<img alt="snow_nosnow" src="../_images/othersnow_values.png" />
 </section>
 <section id="satellite-dataset">
 <h2>Satellite dataset<a class="headerlink" href="#satellite-dataset" title="Permalink to this headline">#</a></h2>
@@ -456,8 +441,8 @@ title="Print to PDF"
 <p>First, we must gather all MODIS maps for all days of interest. This can be done using Google Earth Engine. Google Earth Engine contains the MODIS NDSI dataset (<a class="reference external" href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD10A1">https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD10A1</a>). Google Earth Engine can be run in Python or in Java on the Google Earth Engine Code Editor. Running Google Earth Engine requires an account, so we will not show set-up here, but information on access to Google Earth Engine in Python or Java can be found here:</p>
 <p><a class="reference external" href="https://developers.google.com/earth-engine/guides/access">https://developers.google.com/earth-engine/guides/access</a></p>
 <p>For now, we will show a screenshot of an example raster of satellite information from MODIS. The colors range between black (no snow) and white (snow), with intermediate values of snow different shades of blue (color bar is below the map). The range of colors show the variety of snow cover values in southern Norway on one day. The code for visualizing and extracting MODIS snow information is here:</p>
-<img alt="oslo_modis_snow" src="chapters/img/oslo_modis_ndsi.png" />
-<img alt="colorbar_modis_snow" src="chapters/img/colorbar.png" />
+<img alt="oslo_modis_snow" src="../_images/oslo_modis_ndsi.png" />
+<img alt="colorbar_modis_snow" src="../_images/colorbar.png" />
 <p>Next we conduct a extraction of the MODIS NDSI value for every day of our time period of interest for every camera trap location. We conducted this in the Google Earth Code Editor and exported as a csv.</p>
 </section>
 <section id="putting-it-together">
@@ -474,6 +459,84 @@ title="Print to PDF"
 
 <span class="c1"># read in dataset</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">/Users/catherinebreen/code/binarysnowmaps/book/chapters/Chp2_dataprep.ipynb Cell 20</span> in <span class="ni">&lt;cell line: 8&gt;</span><span class="nt">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/catherinebreen/code/binarysnowmaps/book/chapters/Chp2_dataprep.ipynb#X25sZmlsZQ%3D%3D?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;ntbk_data/data.csv&quot;</span> 
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/catherinebreen/code/binarysnowmaps/book/chapters/Chp2_dataprep.ipynb#X25sZmlsZQ%3D%3D?line=6&#39;</span><span class="o">&gt;</span><span class="mi">7</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># read in dataset</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/catherinebreen/code/binarysnowmaps/book/chapters/Chp2_dataprep.ipynb#X25sZmlsZQ%3D%3D?line=7&#39;</span><span class="o">&gt;</span><span class="mi">8</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/cv4e/lib/python3.8/site-packages/pandas/util/_decorators.py:311,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/cv4e/lib/python3.8/site-packages/pandas/io/parsers/readers.py:680,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">677</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">680</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/cv4e/lib/python3.8/site-packages/pandas/io/parsers/readers.py:575,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">577</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">578</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/miniconda3/envs/cv4e/lib/python3.8/site-packages/pandas/io/parsers/readers.py:934,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">934</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/cv4e/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1218,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1214</span>     <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;rb&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span> <span class="c1"># error: No overload variant of &quot;get_handle&quot; matches argument types</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span> <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1217</span> <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1218</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1220</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1221</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1222</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1223</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1224</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1225</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1226</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1227</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1228</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1229</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~/miniconda3/envs/cv4e/lib/python3.8/site-packages/pandas/io/common.py:786,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">782</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">786</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">794</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;ntbk_data/data.csv&#39;
 </pre></div>
 </div>
 </div>
