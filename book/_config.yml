@@ -3,7 +3,7 @@
 
 title: "Custom binary snow maps with camera traps"
 author: Catherine Breen, University of Washington
-logo: img/modis_book.svg
+logo: ./img/modis_book.png
 only_build_toc_files: true
 
 # Add GitHub buttons to your book
