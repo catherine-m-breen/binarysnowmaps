@@ -26,7 +26,7 @@ parts:
 
 - caption: Chapter Four
   chapters:
-    - file: chapters/Chp4_evaluatingThreshold
+    - file: chapters/Chp2_dataprep
 
 - caption: Chapter Five
   chapters:
