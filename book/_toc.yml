@@ -24,9 +24,13 @@ parts:
   chapters:
     - file: chapters/Chp3_findingThreshold
 
+- caption: Chapter Three
+  chapters:
+    - file: chapters/Chp3_findingThreshold
+
 - caption: Chapter Four
   chapters:
-    - file: chapters/Chp2_dataprep
+    - file: chapters/Chp4_evaluatingThreshold
 
 - caption: Chapter Five
   chapters:
@@ -35,34 +39,6 @@ parts:
 - caption: Chapter Six
   chapters:
     - file: chapters/Chp6_conclusion
-
-# - caption: Chapter Seven
-#   chapters:
-#     - file: chapters/workflow
-
-# - caption: Chapter Eight
-#   chapters:
-#     - file: chapters/reproducibility
-
-# - caption: Chapter Nine
-#   chapters:
-#     - file: chapters/conclusion
-
-# - caption: Chapter Ten (optional)
-#   chapters:
-#     - file: chapters/todo
-
-# - caption: Chapter Eleven (optional)
-#   chapters:
-#     - file: chapters/questions
-
-# - caption: Chapter Twelve (optional)
-#   chapters:
-#     - file: chapters/troubleshooting
-
-# - caption: Chapter Thirteen
-#   chapters:
-#     - file: chapters/example
 
 # - caption: Reference
 #   chapters:
