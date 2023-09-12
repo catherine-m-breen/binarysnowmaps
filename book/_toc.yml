@@ -24,10 +24,6 @@ parts:
   chapters:
     - file: chapters/Chp3_findingThreshold
 
-- caption: Chapter Three
-  chapters:
-    - file: chapters/Chp3_findingThreshold
-
 - caption: Chapter Four
   chapters:
     - file: chapters/Chp4_evaluatingThreshold
