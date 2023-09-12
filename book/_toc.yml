@@ -30,11 +30,11 @@ parts:
 
 - caption: Chapter Five
   chapters:
-    - file: chapters/tryOnOwn
+    - file: chapters/Chp5_tryOnOwn
 
 - caption: Chapter Six
   chapters:
-    - file: chapters/Chp6_conclusion.ipynb
+    - file: chapters/Chp6_conclusion
 
 # - caption: Chapter Seven
 #   chapters:
