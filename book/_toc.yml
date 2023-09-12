@@ -24,15 +24,15 @@ parts:
   chapters:
     - file: chapters/Chp3_findingThreshold
 
-- caption: Chapter Four
-  chapters:
-    - file: chapters/Chp4_evaluatingThreshold
+# - caption: Chapter Four
+#   chapters:
+#     - file: chapters/Chp4_evaluatingThreshold
 
-- caption: Chapter Five
+- caption: Chapter Four
   chapters:
     - file: chapters/Chp5_tryOnOwn
 
-- caption: Chapter Six
+- caption: Chapter Five
   chapters:
     - file: chapters/Chp6_conclusion
 
